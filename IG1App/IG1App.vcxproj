@@ -134,6 +134,7 @@
     <ClCompile Include="IG1App.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Viewport.cpp" />
   </ItemGroup>

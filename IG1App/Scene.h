@@ -9,6 +9,7 @@
 #include "Entity.h"
 
 #include <vector>
+#include "Texture.h"
 
 //-------------------------------------------------------------------------
 
@@ -24,18 +25,17 @@ public:
 	void init();
 
     void render(Camera const& cam) const;
-#pragma region implementación
+#pragma region implementación1.0
 	void update();
 #pragma endregion
-	
+
 protected:
+#pragma region implementación1.1
+	std::vector<Texture*> gTextures;
+#pragma endregion
 	void free();
 	void setGL();
 	void resetGL();
-
-
-
-
 	std::vector<Abs_Entity*> gObjects;  // Entities (graphic objects) of the scene
 };
 //-------------------------------------------------------------------------

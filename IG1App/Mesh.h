@@ -29,7 +29,7 @@ public:
 	std::vector<glm::dvec4> const& colors() const { return vColors; };
 
 		
-#pragma region Implementación Enunciado
+#pragma region Implementación1.0
 	static Mesh* generaPoligono(GLuint numL, GLdouble rd);
 	static Mesh* generaSierpinski(GLdouble rd, GLuint numP);
 	static Mesh* generaTrianguloRGB(GLdouble rd);
@@ -37,7 +37,12 @@ public:
 	static Mesh* generaRectanguloRGB(GLdouble w, GLdouble h);
 #pragma endregion
 protected:
-	
+#pragma region Implementación1.1
+	std::vector<glm::dvec2> vTexCoords;  // vertex array
+
+#pragma endregion
+
+
 	GLuint mPrimitive = GL_TRIANGLES;   // graphic primitive: GL_POINTS, GL_LINES, GL_TRIANGLES, ...
 	GLuint mNumVertices = 0;  // number of elements ( = vVertices.size())
 	std::vector<glm::dvec3> vVertices;  // vertex array

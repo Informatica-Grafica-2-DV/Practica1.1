@@ -13,6 +13,11 @@ void Scene::init()
 	// allocate memory and load resources
     // Lights
     // Textures
+#pragma region implementación1.1Texture
+	//Texture* currTexture 
+
+#pragma endregion
+
 
     // Graphics objects (entities) of the scene
 	gObjects.push_back(new EjesRGB(400.0));
