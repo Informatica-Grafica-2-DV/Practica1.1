@@ -3,6 +3,11 @@
 #include <gtc/matrix_transform.hpp>  
 #include <gtc/type_ptr.hpp>
 
+#pragma region includesImplementación
+#include "Resources.h"
+#pragma endregion
+
+
 using namespace glm;
 //-------------------------------------------------------------------------
 
@@ -14,7 +19,10 @@ void Scene::init()
     // Lights
     // Textures
 #pragma region implementación1.1Texture
-	//Texture* currTexture 
+	for (int i = 0; i < Resources::textureSize(); i++ ) {
+		Texture currTexture;
+		currTexture.load(textureRute[i]);
+	}
 
 #pragma endregion
 

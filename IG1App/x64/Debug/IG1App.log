@@ -1,14 +1,3 @@
-﻿  Camera.cpp
-  Entity.cpp
-  IG1App.cpp
-  main.cpp
-  Mesh.cpp
-G:\2do\2doCuatrimestre\IG\practicas\Practica2\IG1App\Mesh.cpp(78,23): warning C4018: '<': no coinciden signed/unsigned
-G:\2do\2doCuatrimestre\IG\practicas\Practica2\IG1App\Mesh.cpp(99,23): warning C4018: '<': no coinciden signed/unsigned
-  Resources.cpp
-G:\2do\2doCuatrimestre\IG\practicas\Practica2\IG1App\Resources.cpp(8,1): error C3381: 'TextureId': los especificadores de acceso al ensamblado solamente están disponibles en el código compilado con la opción /clr
-G:\2do\2doCuatrimestre\IG\practicas\Practica2\IG1App\Resources.cpp(30,11): error C2065: 'BaldosaC': identificador no declarado
-G:\2do\2doCuatrimestre\IG\practicas\Practica2\IG1App\Resources.cpp(33,1): fatal error C1004: se encontró un final de archivo no esperado
-  Scene.cpp
-  Viewport.cpp
-  Generando código...
+﻿  Resources.h
+G:\2do\2doCuatrimestre\IG\practicas\Practica2\IG1App\Resources.h(21,2): warning C4091: 'typedef ': se ha omitido a la izquierda de 'TextureId' cuando no hay ninguna variable declarada
+  IG1App.vcxproj -> G:\2do\2doCuatrimestre\IG\practicas\Practica2\bin\IG1AppDebug.exe
