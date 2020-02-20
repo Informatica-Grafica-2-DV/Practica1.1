@@ -1,13 +1,4 @@
-﻿  Camera.cpp
-  Entity.cpp
-  IG1App.cpp
-  main.cpp
-  Mesh.cpp
-G:\2do\2doCuatrimestre\IG\practicas\Practica-_1\IG1App\Mesh.cpp(76,23): warning C4018: '<': no coinciden signed/unsigned
-G:\2do\2doCuatrimestre\IG\practicas\Practica-_1\IG1App\Mesh.cpp(97,23): warning C4018: '<': no coinciden signed/unsigned
-  Scene.cpp
-  Viewport.cpp
-  Generando código...
+﻿Debug\Resources.obj : warning LNK4042: objeto especificado más de una vez; omitidos los sobrantes
 IG1App.obj : error LNK2019: símbolo externo __imp__glutInitWindowSize@8 sin resolver al que se hace referencia en la función "protected: void __thiscall IG1App::iniWinOpenGL(void)" (?iniWinOpenGL@IG1App@@IAEXXZ)
 IG1App.obj : error LNK2019: símbolo externo __imp__glutInitDisplayMode@4 sin resolver al que se hace referencia en la función "protected: void __thiscall IG1App::iniWinOpenGL(void)" (?iniWinOpenGL@IG1App@@IAEXXZ)
 IG1App.obj : error LNK2019: símbolo externo __imp__glutMainLoop@0 sin resolver al que se hace referencia en la función "public: void __thiscall IG1App::run(void)" (?run@IG1App@@QAEXXZ)
@@ -25,5 +16,5 @@ IG1App.obj : error LNK2019: símbolo externo __imp__glutSetOption@8 sin resolver
 IG1App.obj : error LNK2019: símbolo externo __imp__glutInitContextVersion@8 sin resolver al que se hace referencia en la función "protected: void __thiscall IG1App::iniWinOpenGL(void)" (?iniWinOpenGL@IG1App@@IAEXXZ)
 IG1App.obj : error LNK2019: símbolo externo __imp__glutInitContextFlags@4 sin resolver al que se hace referencia en la función "protected: void __thiscall IG1App::iniWinOpenGL(void)" (?iniWinOpenGL@IG1App@@IAEXXZ)
 IG1App.obj : error LNK2019: símbolo externo __imp__glutInitContextProfile@4 sin resolver al que se hace referencia en la función "protected: void __thiscall IG1App::iniWinOpenGL(void)" (?iniWinOpenGL@IG1App@@IAEXXZ)
-G:\2do\2doCuatrimestre\IG\practicas\Practica-_1\freeglut\lib\x64\freeglut.lib : warning LNK4272: el tipo de máquina de biblioteca 'x64' está en conflicto con el tipo de máquina de destino 'x86'
-G:\2do\2doCuatrimestre\IG\practicas\Practica-_1\bin\IG1AppDebug.exe : fatal error LNK1120: 17 externos sin resolver
+G:\2do\2doCuatrimestre\IG\practicas\Practica2\freeglut\lib\x64\freeglut.lib : warning LNK4272: el tipo de máquina de biblioteca 'x64' está en conflicto con el tipo de máquina de destino 'x86'
+G:\2do\2doCuatrimestre\IG\practicas\Practica2\bin\IG1AppDebug.exe : fatal error LNK1120: 17 externos sin resolver

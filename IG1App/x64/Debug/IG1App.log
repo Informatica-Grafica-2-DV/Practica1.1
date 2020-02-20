@@ -1,3 +1,7 @@
-﻿  Resources.h
-G:\2do\2doCuatrimestre\IG\practicas\Practica2\IG1App\Resources.h(21,2): warning C4091: 'typedef ': se ha omitido a la izquierda de 'TextureId' cuando no hay ninguna variable declarada
+﻿  Mesh.cpp
+G:\2do\2doCuatrimestre\IG\practicas\Practica2\IG1App\Mesh.cpp(81,23): warning C4018: '<': no coinciden signed/unsigned
+G:\2do\2doCuatrimestre\IG\practicas\Practica2\IG1App\Mesh.cpp(102,23): warning C4018: '<': no coinciden signed/unsigned
+  Scene.cpp
+G:\2do\2doCuatrimestre\IG\practicas\Practica2\IG1App\Resources.h(20,2): warning C4091: 'typedef ': se ha omitido a la izquierda de 'TextureId' cuando no hay ninguna variable declarada
+  Generando código...
   IG1App.vcxproj -> G:\2do\2doCuatrimestre\IG\practicas\Practica2\bin\IG1AppDebug.exe

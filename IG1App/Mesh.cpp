@@ -17,17 +17,21 @@ void Mesh::render() const
     // transfer the coordinates of the vertices
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_DOUBLE, 0, vVertices.data());  // number of coordinates per vertex, type of each coordinate, stride, pointer 
-    glVertexPointer(2, GL_DOUBLE, 0, vTexCoords.data());  // number of coordinates per vertex, type of each coordinate, stride, pointer 
 
     if (vColors.size() > 0) { // transfer colors
       glEnableClientState(GL_COLOR_ARRAY);
       glColorPointer(4, GL_DOUBLE, 0, vColors.data());  // components number (rgba=4), type of each component, stride, pointer  
+    }
+    if (vTexCoords.size() > 0) {
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        glVertexPointer(2, GL_DOUBLE, 0, vTexCoords.data());  // number of coordinates per vertex, type of each coordinate, stride, pointer 
     }
 
 	draw();
 
     glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
   }
 }
 //-------------------------------------------------------------------------

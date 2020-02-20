@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <array>
 
 using namespace std;
 
@@ -20,18 +19,19 @@ typedef enum TextureId
 	Size
 };
 
-static const string textureRute[TextureId::Size] = {
-		"./Bmps/baldosaC.png",
-		"./Bmps/baldosaF.png",
-		"./Bmps/baldosaP.png",
-		"./Bmps/Container.png",
-		"./Bmps/Grass.png",
-		"./Bmps/PapelC.png",
-		"./Bmps/PapelE.png",
-		"./Bmps/WindowC.png",
-		"./Bmps/WindowV.png",
-		"./Bmps/Zelda.png"
+static const vector<string> routes{
+	{"../Bmps/baldosaC.bmp"},
+	{"../Bmps/baldosaF.bmp"},
+	{"../Bmps/baldosaP.bmp"},
+	{"../Bmps/container.bmp"},
+	{"../Bmps/grass.bmp"},
+	{"../Bmps/papelC.bmp"},
+	{"../Bmps/papelE.bmp"},
+	{"../Bmps/windowC.bmp"},
+	{"../Bmps/windowV.bmp"},
+	{"../Bmps/Zelda.bmp"}
 };
+
 
 class Resources
 {

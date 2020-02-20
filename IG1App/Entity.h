@@ -6,6 +6,7 @@
 #include <glm.hpp>
 
 #include "Mesh.h"
+#include "Texture.h"
 
 //-------------------------------------------------------------------------
 
@@ -28,7 +29,13 @@ public:
 	void setMColor(dvec4 newColor) { mColor = newColor; }; //Aplica color a la malla
 	virtual void update() = 0;
 
+#pragma endregion 1.0
+
+#pragma region Implementación Enunciado 1.1
+	Texture* mTexture = nullptr; 
+	void setTexture(Texture* tex) { mTexture = tex; };
 #pragma endregion
+
 protected:
 
 	Mesh* mMesh = nullptr;   // the mesh

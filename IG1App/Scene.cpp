@@ -18,10 +18,11 @@ void Scene::init()
 	// allocate memory and load resources
     // Lights
     // Textures
-#pragma region implementación1.1Texture
-	for (int i = 0; i < Resources::textureSize(); i++ ) {
+#pragma region Cargar texturas
+	for (int i = 0; i < Resources::textureSize(); ++i ) {
 		Texture currTexture;
-		currTexture.load(textureRute[i]);
+		currTexture.load(routes[i]);
+		gTextures.push_back(&currTexture);
 	}
 
 #pragma endregion
