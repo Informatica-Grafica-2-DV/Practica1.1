@@ -36,6 +36,11 @@ public:
 	static Mesh* generaRectangulo(GLdouble w, GLdouble h);
 	static Mesh* generaRectanguloRGB(GLdouble w, GLdouble h);
 #pragma endregion
+
+#pragma region Implementación1.1
+	static Mesh* generaEstrella3D(GLdouble re, GLuint np, GLdouble h);
+#pragma endregion
+
 protected:
 #pragma region Implementación1.1
 	std::vector<glm::dvec2> vTexCoords;  // vertex array

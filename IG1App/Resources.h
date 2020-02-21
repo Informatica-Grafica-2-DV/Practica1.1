@@ -16,6 +16,7 @@ typedef enum TextureId
 	WindowC,
 	WindowV,
 	Zelda,
+	//no borrar Size
 	Size
 };
 

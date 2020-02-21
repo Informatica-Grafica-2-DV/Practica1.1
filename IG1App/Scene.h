@@ -28,10 +28,19 @@ public:
 #pragma region implementación1.0
 	void update();
 #pragma endregion
+#pragma region implementación1.1
+	void setState(int id_);
+	void initScene1();
+	void initScene2();
+	void chargeTextures();
+	int getState() { return mId; };
+#pragma endregion
+
 
 protected:
 #pragma region implementación1.1
 	std::vector<Texture*> gTextures;
+	int mId = 0;
 #pragma endregion
 	void free();
 	void setGL();

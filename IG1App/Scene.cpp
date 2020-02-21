@@ -15,28 +15,44 @@ void Scene::init()
 { 
 	setGL();  // OpenGL settings
 
+	if (mId == 0) {
+		initScene1();
+	}
+	else if(mId == 1)
+	{
+		initScene2();
+	}
+
 	// allocate memory and load resources
     // Lights
     // Textures
-#pragma region Cargar texturas
-	for (int i = 0; i < Resources::textureSize(); ++i ) {
-		Texture currTexture;
-		currTexture.load(routes[i]);
-		gTextures.push_back(&currTexture);
-	}
-
-#pragma endregion
-
-
     // Graphics objects (entities) of the scene
+
+
+}
+
+void Scene::chargeTextures() {
+	for (int i = 0; i < Resources::textureSize(); ++i) {
+		Texture* currTexture = new Texture();
+		currTexture->load(routes[i]);
+		gTextures.push_back(currTexture);
+	}
+}
+
+void Scene::initScene2() {
+	chargeTextures();
+}
+
+void Scene::initScene1() {
 	gObjects.push_back(new EjesRGB(400.0));
 
 #pragma region Ejercicio1
 	gObjects.push_back(new Poligono(3, 300)); //Triángulo
 	gObjects.back()->setMColor({ 255.0, 255.0, 0.0, 1.0 }); //Asignamos amarillo al triángulo
 	gObjects.push_back(new Poligono(360, 300)); //Circunferencia
-	gObjects.back()->setMColor({255.0, 0.0, 255.0, 1.0}); //Asignamos magenta al triángulo
+	gObjects.back()->setMColor({ 255.0, 0.0, 255.0, 1.0 }); //Asignamos magenta al triángulo
 #pragma endregion
+	
 #pragma region Ejercicio2
 	gObjects.push_back(new Sierpinski(300, 10000));
 	gObjects.back()->setMColor(dvec4(1.0, 1.0, 0.0, 1.0)); //Asignamos magenta a Sierpinski
@@ -45,7 +61,7 @@ void Scene::init()
 	gObjects.push_back(new TrianguloRGB(60));
 #pragma endregion
 #pragma region Ejercicio4
-	gObjects.push_back(new RectanguloRGB(800,600));
+	gObjects.push_back(new RectanguloRGB(800, 600));
 	gObjects.back()->setModelMat(translate(gObjects.back()->modelMat(), dvec3(0.0, 0.0, -100.0)));
 #pragma endregion
 
@@ -58,27 +74,33 @@ void Scene::free()
 	{
 		delete el;  el = nullptr;
 	}
+	gObjects.clear();
+	for (int i = 0; i < gTextures.size(); ++i) {
+		delete gTextures.at(i);
+		gTextures[i] = nullptr;
+	}
+	gTextures.clear();
 }
 //-------------------------------------------------------------------------
 void Scene::setGL() 
 {
 	// OpenGL basic setting
 	glClearColor(0.0, 0.0, 0.0, 1.0);  // background color (alpha=1 -> opaque)
-	glEnable(GL_DEPTH_TEST);  // enable Depth test 
-
+	glEnable(GL_DEPTH_TEST);  // enable Depth test
+	glEnable(GL_TEXTURE_2D);
 }
 //-------------------------------------------------------------------------
 void Scene::resetGL() 
 {
 	glClearColor(.0, .0, .0, .0);  // background color (alpha=1 -> opaque)
 	glDisable(GL_DEPTH_TEST);  // disable Depth test 	
+	glDisable(GL_TEXTURE_2D);  // disable Depth test 	
 }
 //-------------------------------------------------------------------------
 
 void Scene::render(Camera const& cam) const 
 {
 	cam.upload();
-
 	for (Abs_Entity* el : gObjects)
 	{
 	  el->render(cam.viewMat());
@@ -91,6 +113,10 @@ void Scene::update() {
 	for (Abs_Entity* el : gObjects) {
 		el->update();
 	}
+}
+
+void Scene::setState(int id_) {
+	mId = id_;
 }
 #pragma endregion
 

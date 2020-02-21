@@ -32,7 +32,6 @@ public:
 #pragma endregion 1.0
 
 #pragma region Implementación Enunciado 1.1
-	Texture* mTexture = nullptr; 
 	void setTexture(Texture* tex) { mTexture = tex; };
 #pragma endregion
 
@@ -45,6 +44,7 @@ protected:
 
 #pragma region Implementación Enunciado
 	dvec4 mColor;
+	Texture* mTexture = nullptr;
 #pragma endregion
 };
 //-------------------------------------------------------------------------
@@ -58,7 +58,7 @@ public:
 	virtual void update() {};
 };
 
-#pragma region Implementación Enunciado
+#pragma region Implementación 1.0
 class Poligono : public Abs_Entity
 {
 private:
@@ -69,8 +69,6 @@ public:
 	~Poligono();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update() {};
-
-
 };
 
 class Sierpinski : public Abs_Entity
@@ -115,4 +113,18 @@ public:
 
 };
 #pragma endregion
+
+#pragma region Implementación1.1
+class Estrella3D : public Abs_Entity
+{
+public:
+	Estrella3D();
+	~Estrella3D();
+
+private:
+
+};
+
+#pragma endregion
+
 #endif //_H_Entities_H_

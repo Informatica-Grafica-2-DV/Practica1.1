@@ -70,7 +70,7 @@ Mesh * Mesh::createRGBAxes(GLdouble l)
 }
 //-------------------------------------------------------------------------
 
-#pragma region Implementación Enunciado
+#pragma region Implementación1.0
 //Genera polígonos
 Mesh* Mesh::generaPoligono(GLuint numL, GLdouble rd) {
     GLdouble angulo = 90;
@@ -154,5 +154,20 @@ Mesh* Mesh::generaRectanguloRGB(GLdouble w, GLdouble h) {
     rectangulo->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
 
     return rectangulo;
+}
+#pragma endregion
+
+#pragma region Implementación1.1
+Mesh* Mesh::generaEstrella3D(GLdouble re, GLuint np, GLdouble h) {
+    Mesh* estrella = new Mesh();
+    estrella->mPrimitive = GL_TRIANGLE_FAN;
+    estrella->mNumVertices = 2 * np + 2;
+    estrella->vVertices.reserve(estrella->mNumVertices);
+    estrella->vVertices.emplace_back(0.0, 0.0, 0.0);
+    GLdouble ri = re / 2; //ri = radio interior; re = radio exterior
+    // r^2 = (x - a)^2 + (y - b)^2 + (z - c)^2
+    estrella->vVertices.emplace_back();
+    //
+
 }
 #pragma endregion

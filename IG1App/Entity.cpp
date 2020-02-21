@@ -61,11 +61,15 @@ void Poligono::render(glm::dmat4 const& modelViewMat) const {
 		upload(aMat);
 		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
+		if (mTexture != nullptr) {
+			mTexture->bind(GL_REPLACE);
+		}
 		mMesh->render();
 
 		//Reseteamos aributos
 		glLineWidth(1);
 		glColor3d(1, 1, 1);
+		mTexture->unbind();
 	}
 }
 #pragma endregion
@@ -108,12 +112,16 @@ void TrianguloRGB::render(glm::dmat4 const& modelViewMat) const {
 		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
 		glPolygonMode(GL_BACK, GL_LINE); //Para que no se rellene la parte trasera del triángulo.
+		if (mTexture != nullptr) {
+			mTexture->bind(GL_REPLACE);
+		}
 		mMesh->render();
 
 		//Reseteamos aributos
 		glLineWidth(1);
 		glColor3d(1, 1, 1);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		mTexture->unbind();
 	}
 }
 //Se encarga del movimiento
@@ -143,12 +151,16 @@ void RectanguloRGB::render(glm::dmat4 const& modelViewMat) const {
 		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
 		glPolygonMode(GL_BACK, GL_LINE);
+		if (mTexture != nullptr) {
+			mTexture->bind(GL_REPLACE);
+		}
 		mMesh->render();
 
 		//Reseteamos aributos
 		glLineWidth(1);
 		glColor3d(1, 1, 1);
-		glPolygonMode(GL_FRONT, GL_FILL);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		mTexture->unbind();
 	}
 }
 

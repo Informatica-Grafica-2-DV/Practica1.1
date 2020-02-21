@@ -131,6 +131,21 @@ void IG1App::key(unsigned char key, int x, int y)
 	case 'u':
 		mScene->update();
 		break;
+	case '1':
+		if (mScene->getState() != 1) {
+			delete mScene;
+			mScene = new Scene;
+			mScene->setState(1);
+			mScene->init();
+		}
+		break;
+	case '0':
+		if (mScene->getState() != 0) {
+			delete mScene;
+			mScene = new Scene;
+			mScene->setState(0);
+			mScene->init();
+		}		break;
 	default:
 		need_redisplay = false;
 		break;
