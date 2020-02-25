@@ -1,42 +1,36 @@
-#include <iostream>
+#pragma once
+
 #include <string>
 #include <vector>
 
 using namespace std;
 
-typedef enum TextureId
-{
-	BaldosaC,
-	BaldosaF,
-	BaldosaP,
-	Container,
-	Grass,
-	PapelC,
-	PapelE,
-	WindowC,
-	WindowV,
-	Zelda,
-	//no borrar Size
-	Size
-};
-
-static const vector<string> routes{
-	{"../Bmps/baldosaC.bmp"},
-	{"../Bmps/baldosaF.bmp"},
-	{"../Bmps/baldosaP.bmp"},
-	{"../Bmps/container.bmp"},
-	{"../Bmps/grass.bmp"},
-	{"../Bmps/papelC.bmp"},
-	{"../Bmps/papelE.bmp"},
-	{"../Bmps/windowC.bmp"},
-	{"../Bmps/windowV.bmp"},
-	{"../Bmps/Zelda.bmp"}
-};
-
-
-class Resources
-{
+class Resources {
 public:
-	static int textureSize() { return Size; };
-};
+	enum TextureId : int
+	{
+		//images
+		BaldosaC,
+		BaldosaF,
+		BaldosaP,
+		Container,
+		Grass,
+		PapelC,
+		PapelE,
+		WindowC,
+		WindowV,
+		Zelda,
 
+		//no borrar Size
+		Size
+	};
+
+	struct ImageInfo {
+		TextureId id;
+		string fileName;
+	};
+
+	static vector<ImageInfo> images_; // initialized in .cpp
+
+	static int textureSize() { return Size; }
+};

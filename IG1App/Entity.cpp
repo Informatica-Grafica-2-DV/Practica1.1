@@ -46,7 +46,7 @@ void EjesRGB::render(dmat4 const& modelViewMat) const
 	}
 }
 
-#pragma region Implementación Enunciado
+#pragma region Implementación 1.0
 #pragma region Poligono
 Poligono::Poligono(GLuint numL_, GLdouble rd_) : numL(numL_), rd(rd_) {
 	mMesh = Mesh::generaPoligono(numL, rd);
@@ -61,15 +61,13 @@ void Poligono::render(glm::dmat4 const& modelViewMat) const {
 		upload(aMat);
 		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
-		if (mTexture != nullptr) {
-			mTexture->bind(GL_REPLACE);
-		}
+		if (mTexture != nullptr) mTexture->bind(GL_REPLACE);
 		mMesh->render();
 
 		//Reseteamos aributos
 		glLineWidth(1);
 		glColor3d(1, 1, 1);
-		mTexture->unbind();
+		if(mTexture != nullptr) mTexture->unbind();
 	}
 }
 #pragma endregion
@@ -112,16 +110,14 @@ void TrianguloRGB::render(glm::dmat4 const& modelViewMat) const {
 		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
 		glPolygonMode(GL_BACK, GL_LINE); //Para que no se rellene la parte trasera del triángulo.
-		if (mTexture != nullptr) {
-			mTexture->bind(GL_REPLACE);
-		}
+		if (mTexture != nullptr) mTexture->bind(GL_REPLACE);
 		mMesh->render();
 
 		//Reseteamos aributos
 		glLineWidth(1);
 		glColor3d(1, 1, 1);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		mTexture->unbind();
+		if(mTexture != nullptr) mTexture->unbind();
 	}
 }
 //Se encarga del movimiento
@@ -133,7 +129,6 @@ void TrianguloRGB::update() {
 	setModelMat(rotate(modelMat(), radians(angulo), dvec3(0.0, 0.0, 1.0)));
 }
 #pragma endregion
-
 #pragma region RectánguloRGB
 
 RectanguloRGB::RectanguloRGB(GLdouble w_, GLdouble h_) :width(w_), height(h_) {
@@ -151,21 +146,48 @@ void RectanguloRGB::render(glm::dmat4 const& modelViewMat) const {
 		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
 		glPolygonMode(GL_BACK, GL_LINE);
-		if (mTexture != nullptr) {
-			mTexture->bind(GL_REPLACE);
-		}
+		if (mTexture != nullptr) mTexture->bind(GL_REPLACE);
 		mMesh->render();
 
 		//Reseteamos aributos
 		glLineWidth(1);
 		glColor3d(1, 1, 1);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		mTexture->unbind();
+		if(mTexture != nullptr) mTexture->unbind();
 	}
 }
 
 #pragma endregion
-
 #pragma endregion
+#pragma region Implementación 1.1
+Estrella3D::Estrella3D(GLdouble re, GLuint np, GLdouble h) : re_(re), np_(np), h_(h) {
+	mMesh = Mesh::generaEstrella3D(re_, np_, h_);
+}
+
+Estrella3D::~Estrella3D() {
+	delete mMesh; mMesh = nullptr;
+}
+
+void Estrella3D::render(glm::dmat4 const& modelViewMat) const {
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat;  //glm matrix multiplication
+		if(mTexture != nullptr) mTexture->bind(GL_REPLACE);
+		upload(aMat);
+		glColor3d(mColor.r, mColor.g, mColor.b);
+		glLineWidth(2);
+		mMesh->render();
+		
+		aMat = rotate(aMat, radians(180.0), dvec3(0, 1, 0));
+		upload(aMat);
+		mMesh->render();
+
+		//Reseteamos aributos
+		glLineWidth(1);
+		glColor3d(1, 1, 1);
+		if(mTexture != nullptr) mTexture->unbind();
+	}
+}
+#pragma endregion
+
 //-------------------------------------------------------------------------
  

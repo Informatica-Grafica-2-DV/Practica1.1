@@ -117,12 +117,17 @@ public:
 #pragma region Implementación1.1
 class Estrella3D : public Abs_Entity
 {
-public:
-	Estrella3D();
-	~Estrella3D();
-
 private:
+	GLdouble re_;
+	GLuint np_; 
+	GLdouble h_;
 
+public:
+	Estrella3D(GLdouble re, GLuint np, GLdouble h);
+	~Estrella3D();
+	
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update() {}
 };
 
 #pragma endregion

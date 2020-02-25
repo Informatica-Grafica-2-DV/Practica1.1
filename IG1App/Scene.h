@@ -30,8 +30,8 @@ public:
 #pragma endregion
 #pragma region implementación1.1
 	void setState(int id_);
+	void initScene0();
 	void initScene1();
-	void initScene2();
 	void chargeTextures();
 	int getState() { return mId; };
 #pragma endregion

@@ -14,13 +14,14 @@ using namespace glm;
 void Scene::init()
 { 
 	setGL();  // OpenGL settings
+	gObjects.push_back(new EjesRGB(400.0)); //Ejes RGB
 
 	if (mId == 0) {
-		initScene1();
+		initScene0();
 	}
 	else if(mId == 1)
 	{
-		initScene2();
+		initScene1();
 	}
 
 	// allocate memory and load resources
@@ -32,20 +33,23 @@ void Scene::init()
 }
 
 void Scene::chargeTextures() {
-	for (int i = 0; i < Resources::textureSize(); ++i) {
+
+	for (auto& image : Resources::images_) {
 		Texture* currTexture = new Texture();
-		currTexture->load(routes[i]);
+		currTexture->load(image.fileName);
 		gTextures.push_back(currTexture);
 	}
 }
 
-void Scene::initScene2() {
+void Scene::initScene1() {
 	chargeTextures();
+
+	gObjects.push_back(new Estrella3D(100, 13, 100));
+	gObjects.back()->setTexture(gTextures[Resources::BaldosaP]);
+
 }
 
-void Scene::initScene1() {
-	gObjects.push_back(new EjesRGB(400.0));
-
+void Scene::initScene0() {
 #pragma region Ejercicio1
 	gObjects.push_back(new Poligono(3, 300)); //Triángulo
 	gObjects.back()->setMColor({ 255.0, 255.0, 0.0, 1.0 }); //Asignamos amarillo al triángulo

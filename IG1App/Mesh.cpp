@@ -24,7 +24,7 @@ void Mesh::render() const
     }
     if (vTexCoords.size() > 0) {
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-        glVertexPointer(2, GL_DOUBLE, 0, vTexCoords.data());  // number of coordinates per vertex, type of each coordinate, stride, pointer 
+        glTexCoordPointer(2, GL_DOUBLE, 0, vTexCoords.data());  // number of coordinates per vertex, type of each coordinate, stride, pointer 
     }
 
 	draw();
@@ -159,15 +159,31 @@ Mesh* Mesh::generaRectanguloRGB(GLdouble w, GLdouble h) {
 
 #pragma region Implementación1.1
 Mesh* Mesh::generaEstrella3D(GLdouble re, GLuint np, GLdouble h) {
+    GLdouble ri = re / 2; //ri = radio interior; re = radio exterior
+    GLdouble angulo = 90;
+    
     Mesh* estrella = new Mesh();
     estrella->mPrimitive = GL_TRIANGLE_FAN;
     estrella->mNumVertices = 2 * np + 2;
+    
+    //Verticas
     estrella->vVertices.reserve(estrella->mNumVertices);
     estrella->vVertices.emplace_back(0.0, 0.0, 0.0);
-    GLdouble ri = re / 2; //ri = radio interior; re = radio exterior
-    // r^2 = (x - a)^2 + (y - b)^2 + (z - c)^2
-    estrella->vVertices.emplace_back();
-    //
 
+    //Texturas
+    estrella->vTexCoords.reserve(estrella->mNumVertices);
+    estrella->vTexCoords.emplace_back(0.5, 0.5);
+
+    for (int i = 0; i < np; i++) {
+        estrella->vVertices.emplace_back(re * cos(radians(angulo)), re * sin(radians(angulo)), h); //Puntos del radio exterior
+        estrella->vTexCoords.emplace_back(0.5 + 0.5 * cos(radians(angulo)), 0.5 + 0.5*(sin(radians(angulo)))); //Textura en los vértices exteriores
+        angulo -= 360 / (np - 1);
+
+        estrella->vVertices.emplace_back(ri * cos(radians(angulo)), ri * sin(radians(angulo)), h); //Puntos del radio interior
+        estrella->vTexCoords.emplace_back(0.5 + 0.25 * cos(radians(angulo)), 0.5 + 0.25 * (sin(radians(angulo)))); //Textura en los vértices exteriores
+        angulo -= 360 / (np - 1);
+    }
+
+    return estrella;
 }
 #pragma endregion
