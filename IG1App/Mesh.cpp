@@ -177,13 +177,21 @@ Mesh* Mesh::generaEstrella3D(GLdouble re, GLuint np, GLdouble h) {
     for (int i = 0; i < np; i++) {
         estrella->vVertices.emplace_back(re * cos(radians(angulo)), re * sin(radians(angulo)), h); //Puntos del radio exterior
         estrella->vTexCoords.emplace_back(0.5 + 0.5 * cos(radians(angulo)), 0.5 + 0.5*(sin(radians(angulo)))); //Textura en los vértices exteriores
-        angulo -= 360 / (np - 1);
+        angulo += 360.0 / (np* 2);
 
         estrella->vVertices.emplace_back(ri * cos(radians(angulo)), ri * sin(radians(angulo)), h); //Puntos del radio interior
         estrella->vTexCoords.emplace_back(0.5 + 0.25 * cos(radians(angulo)), 0.5 + 0.25 * (sin(radians(angulo)))); //Textura en los vértices exteriores
-        angulo -= 360 / (np - 1);
+        angulo += 360.0 / (np * 2) ;
     }
+    estrella->vVertices.emplace_back(estrella->vVertices[1]);
+    estrella->vTexCoords.emplace_back(estrella->vTexCoords[1]);
+
 
     return estrella;
+}
+Mesh* Mesh::generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh) {
+    Mesh* suelo = generaRectangulo(w, h);
+    
+    return suelo;
 }
 #pragma endregion

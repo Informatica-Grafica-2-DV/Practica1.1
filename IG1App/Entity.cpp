@@ -176,7 +176,6 @@ void Estrella3D::render(glm::dmat4 const& modelViewMat) const {
 		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
 		mMesh->render();
-		
 		aMat = rotate(aMat, radians(180.0), dvec3(0, 1, 0));
 		upload(aMat);
 		mMesh->render();
@@ -186,6 +185,16 @@ void Estrella3D::render(glm::dmat4 const& modelViewMat) const {
 		glColor3d(1, 1, 1);
 		if(mTexture != nullptr) mTexture->unbind();
 	}
+}
+
+void Estrella3D::update() {
+	angle_++;
+	setModelMat(rotate(modelMat(), radians(1.0), dvec3(0.0, 1.0, 1.0)));
+}
+
+Suelo::Suelo(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
+	: w_(w), h_(h), rw_(rw), rh_(rh){
+	mMesh = Mesh::generaRectanguloTexCor(w_, h_, rw_, rh_);
 }
 #pragma endregion
 

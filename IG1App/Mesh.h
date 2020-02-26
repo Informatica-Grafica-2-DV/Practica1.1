@@ -39,6 +39,7 @@ public:
 
 #pragma region Implementación1.1
 	static Mesh* generaEstrella3D(GLdouble re, GLuint np, GLdouble h);
+	static Mesh* generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
 #pragma endregion
 
 protected:

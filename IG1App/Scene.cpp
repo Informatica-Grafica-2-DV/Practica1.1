@@ -13,16 +13,20 @@ using namespace glm;
 
 void Scene::init()
 { 
-	setGL();  // OpenGL settings
+	setGL();  // OpenGL settingsu
 	gObjects.push_back(new EjesRGB(400.0)); //Ejes RGB
-
-	if (mId == 0) {
-		initScene0();
-	}
-	else if(mId == 1)
+	switch (mId)
 	{
+	case 0:
+		initScene0();
+		break;
+	case 1:
 		initScene1();
+		break;
+	default:
+		break;
 	}
+
 
 	// allocate memory and load resources
     // Lights
@@ -43,8 +47,7 @@ void Scene::chargeTextures() {
 
 void Scene::initScene1() {
 	chargeTextures();
-
-	gObjects.push_back(new Estrella3D(100, 13, 100));
+	gObjects.push_back(new Estrella3D(100, 6, 150));
 	gObjects.back()->setTexture(gTextures[Resources::BaldosaP]);
 
 }
@@ -56,7 +59,6 @@ void Scene::initScene0() {
 	gObjects.push_back(new Poligono(360, 300)); //Circunferencia
 	gObjects.back()->setMColor({ 255.0, 0.0, 255.0, 1.0 }); //Asignamos magenta al triángulo
 #pragma endregion
-	
 #pragma region Ejercicio2
 	gObjects.push_back(new Sierpinski(300, 10000));
 	gObjects.back()->setMColor(dvec4(1.0, 1.0, 0.0, 1.0)); //Asignamos magenta a Sierpinski
@@ -68,7 +70,6 @@ void Scene::initScene0() {
 	gObjects.push_back(new RectanguloRGB(800, 600));
 	gObjects.back()->setModelMat(translate(gObjects.back()->modelMat(), dvec3(0.0, 0.0, -100.0)));
 #pragma endregion
-
 }
 //-------------------------------------------------------------------------
 void Scene::free() 

@@ -115,20 +115,34 @@ public:
 #pragma endregion
 
 #pragma region Implementación1.1
+#pragma region Estrella3D
 class Estrella3D : public Abs_Entity
 {
 private:
 	GLdouble re_;
-	GLuint np_; 
+	GLuint np_;
 	GLdouble h_;
+	GLdouble angle_ = 0;
 
 public:
 	Estrella3D(GLdouble re, GLuint np, GLdouble h);
 	~Estrella3D();
-	
+
 	virtual void render(glm::dmat4 const& modelViewMat) const;
-	virtual void update() {}
+	virtual void update();
 };
+#pragma endregion
+#pragma region Suelo
+class Suelo :public Abs_Entity {
+public:
+	Suelo(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
+	~Suelo() {};
+private:
+	GLdouble w_, h_, rw_, rh_;
+};
+#pragma endregion
+
+
 
 #pragma endregion
 
