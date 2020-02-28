@@ -160,6 +160,7 @@ void RectanguloRGB::render(glm::dmat4 const& modelViewMat) const {
 #pragma endregion
 #pragma endregion
 #pragma region Implementación 1.1
+#pragma region Estrella3D
 Estrella3D::Estrella3D(GLdouble re, GLuint np, GLdouble h) : re_(re), np_(np), h_(h) {
 	mMesh = Mesh::generaEstrella3D(re_, np_, h_);
 }
@@ -171,7 +172,7 @@ Estrella3D::~Estrella3D() {
 void Estrella3D::render(glm::dmat4 const& modelViewMat) const {
 	if (mMesh != nullptr) {
 		dmat4 aMat = modelViewMat * mModelMat;  //glm matrix multiplication
-		if(mTexture != nullptr) mTexture->bind(GL_REPLACE);
+		if (mTexture != nullptr) mTexture->bind(GL_REPLACE);
 		upload(aMat);
 		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
@@ -183,7 +184,7 @@ void Estrella3D::render(glm::dmat4 const& modelViewMat) const {
 		//Reseteamos aributos
 		glLineWidth(1);
 		glColor3d(1, 1, 1);
-		if(mTexture != nullptr) mTexture->unbind();
+		if (mTexture != nullptr) mTexture->unbind();
 	}
 }
 
@@ -191,11 +192,40 @@ void Estrella3D::update() {
 	angle_++;
 	setModelMat(rotate(modelMat(), radians(1.0), dvec3(0.0, 1.0, 1.0)));
 }
+#pragma endregion
+
+#pragma region Suelo
 
 Suelo::Suelo(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
-	: w_(w), h_(h), rw_(rw), rh_(rh){
+	: w_(w), h_(h), rw_(rw), rh_(rh) {
 	mMesh = Mesh::generaRectanguloTexCor(w_, h_, rw_, rh_);
 }
+
+Suelo::~Suelo() {
+	delete mMesh; mMesh = nullptr;
+}
+//	virtual void render(glm::dmat4 const& modelViewMat) const {};
+void Suelo::render(glm::dmat4 const& modelViewMat) const {
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat;  //glm matrix multiplication
+		if (mTexture != nullptr) mTexture->bind(GL_REPLACE);
+		upload(aMat);
+		glColor3d(mColor.r, mColor.g, mColor.b);
+		glLineWidth(2);
+		mMesh->render();
+
+		//Reseteamos aributos
+		glLineWidth(1);
+		glColor3d(1, 1, 1);
+		if (mTexture != nullptr) mTexture->unbind();
+	}
+}
+
+#pragma endregion
+
+
+
+
 #pragma endregion
 
 //-------------------------------------------------------------------------

@@ -108,9 +108,6 @@ public:
 	RectanguloRGB(GLdouble w, GLdouble h);
 	~RectanguloRGB();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
-	virtual void update() {};
-
-
 };
 #pragma endregion
 
@@ -134,15 +131,24 @@ public:
 #pragma endregion
 #pragma region Suelo
 class Suelo :public Abs_Entity {
-public:
-	Suelo(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
-	~Suelo() {};
 private:
 	GLdouble w_, h_, rw_, rh_;
+public:
+	Suelo(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
+	~Suelo();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update() {};
 };
 #pragma endregion
-
-
+#pragma region Caja
+class Caja : public Abs_Entity {
+private:
+public:
+	Caja() {};
+	~Caja() {};
+	virtual void render(glm::dmat4 const& modelViewMat) const {};
+};
+#pragma endregion
 
 #pragma endregion
 

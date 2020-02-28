@@ -40,6 +40,7 @@ public:
 #pragma region Implementación1.1
 	static Mesh* generaEstrella3D(GLdouble re, GLuint np, GLdouble h);
 	static Mesh* generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
+	static Mesh* generaContCubo(GLdouble ld);
 #pragma endregion
 
 protected:
@@ -55,8 +56,6 @@ protected:
 	std::vector<glm::dvec4> vColors;    // color array
 
 	virtual void draw() const;
-
-
 };
 //-------------------------------------------------------------------------
 

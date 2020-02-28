@@ -131,12 +131,10 @@ Mesh* Mesh::generaRectangulo(GLdouble w, GLdouble h) {
     rectangulo->mNumVertices = 4;
     rectangulo->mPrimitive = GL_TRIANGLE_STRIP;
     rectangulo->vVertices.reserve(rectangulo->mNumVertices);
-
     rectangulo->vVertices.emplace_back(-w, h, 0.0);
     rectangulo->vVertices.emplace_back(-w, -h, 0.0);
     rectangulo->vVertices.emplace_back(w, h, 0.0);
     rectangulo->vVertices.emplace_back(w, -h, 0.0);
-
     return rectangulo;
 }
 
@@ -185,13 +183,22 @@ Mesh* Mesh::generaEstrella3D(GLdouble re, GLuint np, GLdouble h) {
     }
     estrella->vVertices.emplace_back(estrella->vVertices[1]);
     estrella->vTexCoords.emplace_back(estrella->vTexCoords[1]);
-
-
     return estrella;
 }
+
 Mesh* Mesh::generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh) {
     Mesh* suelo = generaRectangulo(w, h);
-    
+    suelo->vTexCoords.reserve(suelo->mNumVertices);
+    suelo->vTexCoords.emplace_back(vec2(0, rh));
+    suelo->vTexCoords.emplace_back(vec2(0, 0));
+    suelo->vTexCoords.emplace_back(vec2(rw, rh));
+    suelo->vTexCoords.emplace_back(vec2(rw, 0));
     return suelo;
+}
+
+Mesh* Mesh::generaContCubo(GLdouble ld) {
+    Mesh* caras = new Mesh();
+    caras->mPrimitive = GL_TRIANGLE_STRIP;
+    caras->mNumVertices = 10;
 }
 #pragma endregion
