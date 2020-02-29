@@ -97,6 +97,7 @@ void Sierpinski::render(glm::dmat4 const& modelViewMat) const {
 #pragma region TriánguloRGB
 TrianguloRGB::TrianguloRGB(GLdouble rd_) : rd(rd_) {
 	mMesh = Mesh::generaTrianguloRGB(rd);
+	transform = dmat4(1);
 }
 
 TrianguloRGB::~TrianguloRGB() {
@@ -120,12 +121,13 @@ void TrianguloRGB::render(glm::dmat4 const& modelViewMat) const {
 		if(mTexture != nullptr) mTexture->unbind();
 	}
 }
+
 //Se encarga del movimiento
 void TrianguloRGB::update() {
 	angulo++;
 	posCfc.x = 300 * cos(radians(angulo));
 	posCfc.y = 300 * sin(radians(angulo));
-	setModelMat(translate(dmat4(1), posCfc));
+	setModelMat(translate(transform, posCfc));
 	setModelMat(rotate(modelMat(), radians(angulo), dvec3(0.0, 0.0, 1.0)));
 }
 #pragma endregion
@@ -178,6 +180,8 @@ void Estrella3D::render(glm::dmat4 const& modelViewMat) const {
 		upload(aMat);
 		glLineWidth(2);
 		mMesh->render();
+
+		//Segunda estrella
 		aMat = rotate(aMat, radians(180.0), dvec3(0, 1, 0));
 		upload(aMat);
 		mMesh->render();
@@ -189,21 +193,18 @@ void Estrella3D::render(glm::dmat4 const& modelViewMat) const {
 }
 
 void Estrella3D::update() {
-
-	setModelMat(rotate(transform, radians((double)angle_), dvec3(0.0, 0.0, 1.0)));
-	setModelMat(rotate(transform, radians((double)angle_), dvec3(0.0, 1.0, 1.0)));
-	//setModelMat(translate(transform, dvec3({ 0.0,250.0,0.0 })));
-
-	angle_++;
+	angulo++;
+	setModelMat(translate(transform, dvec3({ 0.0,250.0,0.0 })));
+	dmat4 aux = (rotate(modelMat(), radians(angulo), dvec3(0.0, 1.0, 0.0)));
+	setModelMat(rotate(aux, radians(angulo), dvec3(0.0, 0.0, 1.0)));
 }
 #pragma endregion
-
 #pragma region Suelo
 
-Suelo::Suelo(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
-	: w_(w), h_(h), rw_(rw), rh_(rh) {
+Suelo::Suelo(GLdouble w, GLdouble h, GLuint rw, GLuint rh): w_(w), h_(h), rw_(rw), rh_(rh) {
 	mMesh = Mesh::generaRectanguloTexCor(w_, h_, rw_, rh_);
-	setModelMat(rotate(modelMat(), radians(90.0), dvec3(1.0, 0.0, 0.0)));
+	transform = dmat4(1);
+	setModelMat(rotate(transform, radians(90.0), dvec3(1.0, 0.0, 0.0)));
 }
 
 Suelo::~Suelo() {
@@ -224,34 +225,39 @@ void Suelo::render(glm::dmat4 const& modelViewMat) const {
 	}
 }
 
+#pragma endregion
+#pragma region Caja
 Caja::Caja(GLdouble ld) {
-	mMesh = Mesh::generaContCubo(ld);
+	mMesh = Mesh::generaCajaTexCor(ld);
+	transform = dmat4(1);
+	setModelMat(translate(transform, dvec3({ 0.0, ld/2 ,0.0 })));
 }
 
 Caja::~Caja() {
 	delete mMesh; mMesh = nullptr;
 }
 
-
 void Caja::render(glm::dmat4 const& modelViewMat) const {
 	if (mMesh != nullptr) {
 		dmat4 aMat = modelViewMat * mModelMat;  //glm matrix multiplication
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
 		if (mTexture != nullptr) mTexture->bind(GL_REPLACE);
 		upload(aMat);
-		glLineWidth(2);
+		mMesh->render();
+
+		glCullFace(GL_FRONT);
+		if (mTextureInt != nullptr) mTextureInt->bind(GL_REPLACE);
+		upload(aMat);
 		mMesh->render();
 
 		//Reseteamos aributos
-		glLineWidth(1);
 		if (mTexture != nullptr) mTexture->unbind();
+		if (mTextureInt != nullptr) mTextureInt->unbind();
+		glDisable(GL_CULL_FACE);
 	}
 }
-
 #pragma endregion
-
-
-
-
 #pragma endregion
 
 //-------------------------------------------------------------------------

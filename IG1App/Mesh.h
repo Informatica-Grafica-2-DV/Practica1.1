@@ -41,6 +41,7 @@ public:
 	static Mesh* generaEstrella3D(GLdouble re, GLuint np, GLdouble h);
 	static Mesh* generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
 	static Mesh* generaContCubo(GLdouble ld);
+	static Mesh* generaCajaTexCor(GLdouble nl);
 #pragma endregion
 
 protected:

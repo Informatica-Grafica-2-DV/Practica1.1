@@ -121,7 +121,7 @@ private:
 	GLdouble re_;
 	GLuint np_;
 	GLdouble h_;
-	GLdouble angle_ = 0;
+	GLdouble angulo = 1.0f;
 
 public:
 	Estrella3D(GLdouble re, GLuint np, GLdouble h);
@@ -145,12 +145,15 @@ public:
 #pragma region Caja
 class Caja : public Abs_Entity {
 private:
+	Texture* mTextureInt = nullptr;
+
 public:
 	Caja(GLdouble ld);
 	~Caja();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update() {};
 
+	void setTextureInt(Texture* tex) { mTextureInt = tex; };
 };
 #pragma endregion
 

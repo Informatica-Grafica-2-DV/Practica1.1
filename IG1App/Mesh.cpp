@@ -197,27 +197,43 @@ Mesh* Mesh::generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
 }
 
 Mesh* Mesh::generaContCubo(GLdouble ld) {
-    Mesh* caras = new Mesh();
-    caras->mPrimitive = GL_TRIANGLE_STRIP;
-    caras->mNumVertices = 10;
-    caras->vVertices.reserve(caras->mNumVertices);
+    Mesh* cubo = new Mesh();
+
+    cubo->mPrimitive = GL_TRIANGLE_STRIP;
+    cubo->mNumVertices = 10;
+
+    //Vértices
+    cubo->vVertices.reserve(cubo->mNumVertices);
     GLdouble halfLd = ld / 2;
-    caras->vTexCoords.reserve(caras->mNumVertices);
 
-    caras->vVertices.emplace_back(-halfLd , halfLd , halfLd);//v[0]
-    caras->vVertices.emplace_back(-halfLd, -halfLd, halfLd);//v[1]
-    caras->vVertices.emplace_back(halfLd, halfLd, halfLd);//v[2]
-    caras->vVertices.emplace_back(halfLd, -halfLd, halfLd);//v[3]
-    caras->vVertices.emplace_back(halfLd, halfLd, -halfLd);//v[4]
-    caras->vVertices.emplace_back(halfLd, -halfLd, -halfLd);//v[5]
-    caras->vVertices.emplace_back(-halfLd, halfLd, -halfLd);//v[6]
-    caras->vVertices.emplace_back(-halfLd, -halfLd, -halfLd);//v[7]
-    caras->vVertices.emplace_back(caras->vVertices[0]);//v[8] cierre con v[0]
-    caras->vVertices.emplace_back(caras->vVertices[1]);//v[9] cierre con v[1]
 
-    for (int i = 0; i < caras->mNumVertices; i++) {
-        caras->vTexCoords.emplace_back(caras->vVertices[i].x,caras->vVertices[i].y);
+    cubo->vVertices.emplace_back(-halfLd , halfLd , halfLd);//v[0]
+    cubo->vVertices.emplace_back(-halfLd, -halfLd, halfLd);//v[1]
+    cubo->vVertices.emplace_back(halfLd, halfLd, halfLd);//v[2]
+    cubo->vVertices.emplace_back(halfLd, -halfLd, halfLd);//v[3]
+    cubo->vVertices.emplace_back(halfLd, halfLd, -halfLd);//v[4]
+    cubo->vVertices.emplace_back(halfLd, -halfLd, -halfLd);//v[5]
+    cubo->vVertices.emplace_back(-halfLd, halfLd, -halfLd);//v[6]
+    cubo->vVertices.emplace_back(-halfLd, -halfLd, -halfLd);//v[7]
+    cubo->vVertices.emplace_back(cubo->vVertices[0]);//v[6] cierre con v[0]
+    cubo->vVertices.emplace_back(cubo->vVertices[1]);//v[7] cierre con v[1]
+
+    return cubo;
+}
+
+Mesh* Mesh::generaCajaTexCor(GLdouble nl) {
+    //Textura
+    Mesh* cajaTex = generaContCubo(nl);
+    cajaTex->vTexCoords.reserve(16);
+
+    int j = 0;
+    for (int i = 0; i < 4; i++) {
+        cajaTex->vTexCoords.emplace_back(vec2(0, 1));
+        cajaTex->vTexCoords.emplace_back(vec2(0, 0));
+        cajaTex->vTexCoords.emplace_back(vec2(1, 1));
+        cajaTex->vTexCoords.emplace_back(vec2(1, 0));
     }
-    return caras;
+
+    return cajaTex;
 }
 #pragma endregion
