@@ -200,5 +200,24 @@ Mesh* Mesh::generaContCubo(GLdouble ld) {
     Mesh* caras = new Mesh();
     caras->mPrimitive = GL_TRIANGLE_STRIP;
     caras->mNumVertices = 10;
+    caras->vVertices.reserve(caras->mNumVertices);
+    GLdouble halfLd = ld / 2;
+    caras->vTexCoords.reserve(caras->mNumVertices);
+
+    caras->vVertices.emplace_back(-halfLd , halfLd , halfLd);//v[0]
+    caras->vVertices.emplace_back(-halfLd, -halfLd, halfLd);//v[1]
+    caras->vVertices.emplace_back(halfLd, halfLd, halfLd);//v[2]
+    caras->vVertices.emplace_back(halfLd, -halfLd, halfLd);//v[3]
+    caras->vVertices.emplace_back(halfLd, halfLd, -halfLd);//v[4]
+    caras->vVertices.emplace_back(halfLd, -halfLd, -halfLd);//v[5]
+    caras->vVertices.emplace_back(-halfLd, halfLd, -halfLd);//v[6]
+    caras->vVertices.emplace_back(-halfLd, -halfLd, -halfLd);//v[7]
+    caras->vVertices.emplace_back(caras->vVertices[0]);//v[8] cierre con v[0]
+    caras->vVertices.emplace_back(caras->vVertices[1]);//v[9] cierre con v[1]
+
+    for (int i = 0; i < caras->mNumVertices; i++) {
+        caras->vTexCoords.emplace_back(caras->vVertices[i].x,caras->vVertices[i].y);
+    }
+    return caras;
 }
 #pragma endregion

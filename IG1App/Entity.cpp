@@ -163,6 +163,8 @@ void RectanguloRGB::render(glm::dmat4 const& modelViewMat) const {
 #pragma region Estrella3D
 Estrella3D::Estrella3D(GLdouble re, GLuint np, GLdouble h) : re_(re), np_(np), h_(h) {
 	mMesh = Mesh::generaEstrella3D(re_, np_, h_);
+	transform = dmat4(1);
+	setModelMat(translate(transform, dvec3({ 0.0,250.0,0.0 })));
 }
 
 Estrella3D::~Estrella3D() {
@@ -171,10 +173,9 @@ Estrella3D::~Estrella3D() {
 
 void Estrella3D::render(glm::dmat4 const& modelViewMat) const {
 	if (mMesh != nullptr) {
-		dmat4 aMat = modelViewMat * mModelMat;  //glm matrix multiplication
+		dmat4 aMat = modelViewMat * mModelMat * transform;  //glm matrix multiplication
 		if (mTexture != nullptr) mTexture->bind(GL_REPLACE);
 		upload(aMat);
-		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
 		mMesh->render();
 		aMat = rotate(aMat, radians(180.0), dvec3(0, 1, 0));
@@ -183,14 +184,17 @@ void Estrella3D::render(glm::dmat4 const& modelViewMat) const {
 
 		//Reseteamos aributos
 		glLineWidth(1);
-		glColor3d(1, 1, 1);
 		if (mTexture != nullptr) mTexture->unbind();
 	}
 }
 
 void Estrella3D::update() {
+
+	setModelMat(rotate(transform, radians((double)angle_), dvec3(0.0, 0.0, 1.0)));
+	setModelMat(rotate(transform, radians((double)angle_), dvec3(0.0, 1.0, 1.0)));
+	//setModelMat(translate(transform, dvec3({ 0.0,250.0,0.0 })));
+
 	angle_++;
-	setModelMat(rotate(modelMat(), radians(1.0), dvec3(0.0, 1.0, 1.0)));
 }
 #pragma endregion
 
@@ -199,6 +203,7 @@ void Estrella3D::update() {
 Suelo::Suelo(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
 	: w_(w), h_(h), rw_(rw), rh_(rh) {
 	mMesh = Mesh::generaRectanguloTexCor(w_, h_, rw_, rh_);
+	setModelMat(rotate(modelMat(), radians(90.0), dvec3(1.0, 0.0, 0.0)));
 }
 
 Suelo::~Suelo() {
@@ -210,13 +215,34 @@ void Suelo::render(glm::dmat4 const& modelViewMat) const {
 		dmat4 aMat = modelViewMat * mModelMat;  //glm matrix multiplication
 		if (mTexture != nullptr) mTexture->bind(GL_REPLACE);
 		upload(aMat);
-		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
 		mMesh->render();
 
 		//Reseteamos aributos
 		glLineWidth(1);
-		glColor3d(1, 1, 1);
+		if (mTexture != nullptr) mTexture->unbind();
+	}
+}
+
+Caja::Caja(GLdouble ld) {
+	mMesh = Mesh::generaContCubo(ld);
+}
+
+Caja::~Caja() {
+	delete mMesh; mMesh = nullptr;
+}
+
+
+void Caja::render(glm::dmat4 const& modelViewMat) const {
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat;  //glm matrix multiplication
+		if (mTexture != nullptr) mTexture->bind(GL_REPLACE);
+		upload(aMat);
+		glLineWidth(2);
+		mMesh->render();
+
+		//Reseteamos aributos
+		glLineWidth(1);
 		if (mTexture != nullptr) mTexture->unbind();
 	}
 }

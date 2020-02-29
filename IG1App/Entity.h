@@ -44,6 +44,7 @@ protected:
 
 #pragma region Implementación Enunciado
 	dvec4 mColor;
+	glm::dmat4 transform;
 	Texture* mTexture = nullptr;
 #pragma endregion
 };
@@ -108,6 +109,7 @@ public:
 	RectanguloRGB(GLdouble w, GLdouble h);
 	~RectanguloRGB();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update() {};
 };
 #pragma endregion
 
@@ -144,9 +146,11 @@ public:
 class Caja : public Abs_Entity {
 private:
 public:
-	Caja() {};
-	~Caja() {};
-	virtual void render(glm::dmat4 const& modelViewMat) const {};
+	Caja(GLdouble ld);
+	~Caja();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update() {};
+
 };
 #pragma endregion
 

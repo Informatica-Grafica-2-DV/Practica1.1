@@ -49,8 +49,10 @@ void Scene::initScene1() {
 	chargeTextures();
 	gObjects.push_back(new Estrella3D(100, 6, 150));
 	gObjects.back()->setTexture(gTextures[Resources::BaldosaP]);
-	gObjects.push_back(new Suelo(200,200,5,5));
+	gObjects.push_back(new Suelo(500,500,5,5));
 	gObjects.back()->setTexture(gTextures[Resources::BaldosaC]);
+	gObjects.push_back(new Caja(100));
+	gObjects.back()->setTexture(gTextures[Resources::PapelE]);
 }
 
 void Scene::initScene0() {
