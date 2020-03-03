@@ -42,6 +42,7 @@ public:
 	static Mesh* generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
 	static Mesh* generaContCubo(GLdouble ld);
 	static Mesh* generaCajaTexCor(GLdouble nl);
+	static Mesh* generaFoto(GLdouble w, GLdouble h);
 #pragma endregion
 
 protected:

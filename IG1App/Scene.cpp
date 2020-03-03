@@ -46,14 +46,24 @@ void Scene::chargeTextures() {
 }
 
 void Scene::initScene1() {
+	//Cargamos texturas
 	chargeTextures();
-	gObjects.push_back(new Estrella3D(100, 6, 150));
+	
+	//Estrella
+	gObjects.push_back(new Estrella3D(75, 6, 75));
 	gObjects.back()->setTexture(gTextures[Resources::BaldosaP]);
-	gObjects.push_back(new Suelo(1000,1000,5,5));
+
+	//Suelo
+	gObjects.push_back(new Suelo(500, 500, 5, 5));
 	gObjects.back()->setTexture(gTextures[Resources::BaldosaC]);
-	gObjects.push_back(new Caja(100));
+
+	//Caja
+	gObjects.push_back(new Caja(75));
 	gObjects.back()->setTexture(gTextures[Resources::Container]);
 	dynamic_cast<Caja*>(gObjects.back())->setTextureInt(gTextures[Resources::PapelE]);
+
+	//Foto
+	gObjects.push_back(new Foto(50, 75));
 }
 
 void Scene::initScene0() {

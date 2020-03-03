@@ -28,6 +28,10 @@ public:
   
   void setWrap(GLuint wp);  // GL_REPEAT, GL_CLAMP 
 
+#pragma region Implementación 1.1
+  void loadColorBuffer(); 
+#pragma endregion
+
 protected:
 
   void init();

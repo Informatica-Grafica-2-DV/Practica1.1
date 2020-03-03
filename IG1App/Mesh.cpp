@@ -236,4 +236,14 @@ Mesh* Mesh::generaCajaTexCor(GLdouble nl) {
 
     return cajaTex;
 }
+
+Mesh* Mesh::generaFoto(GLdouble w, GLdouble h) {
+    Mesh* suelo = generaRectangulo(w, h);
+    suelo->vTexCoords.reserve(suelo->mNumVertices);
+    suelo->vTexCoords.emplace_back(vec2(0, 1));
+    suelo->vTexCoords.emplace_back(vec2(0, 0));
+    suelo->vTexCoords.emplace_back(vec2(1, 1));
+    suelo->vTexCoords.emplace_back(vec2(1, 0));
+    return suelo;
+}
 #pragma endregion

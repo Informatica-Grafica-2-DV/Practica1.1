@@ -195,8 +195,8 @@ void Estrella3D::render(glm::dmat4 const& modelViewMat) const {
 void Estrella3D::update() {
 	angulo++;
 	setModelMat(translate(transform, dvec3({ 0.0,250.0,0.0 })));
-	dmat4 aux = (rotate(modelMat(), radians(angulo), dvec3(0.0, 1.0, 0.0)));
-	setModelMat(rotate(aux, radians(angulo), dvec3(0.0, 0.0, 1.0)));
+	setModelMat(rotate(modelMat(), radians(angulo), dvec3(0.0, 1.0, 0.0)));
+	setModelMat(rotate(modelMat(), radians(angulo), dvec3(0.0, 0.0, 1.0)));
 }
 #pragma endregion
 #pragma region Suelo
@@ -230,7 +230,7 @@ void Suelo::render(glm::dmat4 const& modelViewMat) const {
 Caja::Caja(GLdouble ld) {
 	mMesh = Mesh::generaCajaTexCor(ld);
 	transform = dmat4(1);
-	setModelMat(translate(transform, dvec3({ 0.0, ld/2 ,0.0 })));
+	setModelMat(translate(transform, dvec3({ -ld / 2, ld / 2 , -ld / 2 })));
 }
 
 Caja::~Caja() {
@@ -240,12 +240,15 @@ Caja::~Caja() {
 void Caja::render(glm::dmat4 const& modelViewMat) const {
 	if (mMesh != nullptr) {
 		dmat4 aMat = modelViewMat * mModelMat;  //glm matrix multiplication
-		glEnable(GL_CULL_FACE);
+		glEnable(GL_CULL_FACE); //Habilita el modo para renderizar la caja por dentro o por fuera
+
+		//Renderiza el exterior de la caja
 		glCullFace(GL_BACK);
 		if (mTexture != nullptr) mTexture->bind(GL_REPLACE);
 		upload(aMat);
 		mMesh->render();
 
+		//Renderiza el interior de la caja
 		glCullFace(GL_FRONT);
 		if (mTextureInt != nullptr) mTextureInt->bind(GL_REPLACE);
 		upload(aMat);
@@ -258,6 +261,35 @@ void Caja::render(glm::dmat4 const& modelViewMat) const {
 	}
 }
 #pragma endregion
+#pragma region Foto
+Foto::Foto(GLdouble w, GLdouble h) : w_(w), h_(h) {	
+	mMesh = Mesh::generaFoto(w, h);
+	transform = dmat4(1);
+	setModelMat(translate(transform, dvec3(0, 1, 0)));
+	setModelMat(rotate(modelMat(), radians(90.0), dvec3(1, 0, 0)));
+}
+
+Foto::~Foto() {
+	delete mMesh; mMesh = nullptr;
+}
+
+void Foto::render(glm::dmat4 const& modelViewMat) const {
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat;  //glm matrix multiplication
+		if (mTexture != nullptr) mTexture->bind(GL_REPLACE);
+		upload(aMat);
+		mMesh->render();
+
+		//Reseteamos aributos
+		if (mTexture != nullptr) mTexture->unbind();
+	}
+}
+
+void Foto::update() {
+	mTexture->loadColorBuffer();
+}
+#pragma endregion
+
 #pragma endregion
 
 //-------------------------------------------------------------------------

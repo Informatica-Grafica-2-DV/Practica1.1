@@ -62,3 +62,15 @@ void Texture::setWrap(GLuint wp) // GL_REPEAT, GL_CLAMP
   glBindTexture(GL_TEXTURE_2D, 0); 
 }
 //-------------------------------------------------------------------------
+
+#pragma region Implementación 1.1
+void Texture::loadColorBuffer() {
+    GLint level = 0;   //Base image level
+    GLint border = 0;  //No border
+    GLint width = 100;
+    GLint height = 100;
+    
+    glReadBuffer(GL_FRONT);
+    glCopyTexImage2D(GL_TEXTURE_2D, level, GL_RGBA, (glutGet(GLUT_WINDOW_WIDTH) / 2) - width, (glutGet(GLUT_WINDOW_HEIGHT) / 2) - height, width, height, border);
+}
+#pragma endregion

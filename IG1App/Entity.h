@@ -157,6 +157,18 @@ public:
 };
 #pragma endregion
 
+#pragma region Foto
+class Foto : public Abs_Entity {
+private:
+	GLdouble w_, h_;
+public:
+	Foto(GLdouble w, GLdouble h);
+	~Foto();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update();
+};
+#pragma endregion
+
 #pragma endregion
 
 #endif //_H_Entities_H_
