@@ -231,7 +231,6 @@ void Suelo::render(glm::dmat4 const& modelViewMat) const {
 Caja::Caja(GLdouble ld) {
 	mMesh = Mesh::generaCajaTexCor(ld);
 	transform = dmat4(1);
-	setModelMat(translate(transform, dvec3({ -ld / 2, ld / 2 , -ld / 2 })));
 }
 
 Caja::~Caja() {
@@ -296,4 +295,26 @@ void Foto::update() {
 #pragma endregion
 
 //-------------------------------------------------------------------------
- 
+
+Cristal::Cristal(GLdouble w, GLdouble h) : Caja()
+{
+	mMesh = Mesh::generaCajaRectangulo(w, h);
+	transform = dmat4(1);
+}
+
+void Cristal::render(glm::dmat4 const& modelViewMat) const
+{
+	if (mMesh != nullptr) {
+		glEnable(GL_BLEND);
+		dmat4 aMat = modelViewMat * mModelMat;  //glm matrix multiplication
+		if (mTexture != nullptr) mTexture->bind(GL_REPLACE);
+		upload(aMat);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
+		mMesh->render();
+
+		//Reseteamos aributos
+		if (mTexture != nullptr) mTexture->unbind();
+		glDisable(GL_CULL_FACE);
+		glDisable(GL_BLEND);
+	}
+}

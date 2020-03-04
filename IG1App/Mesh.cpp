@@ -237,6 +237,31 @@ Mesh* Mesh::generaCajaTexCor(GLdouble nl) {
     return cajaTex;
 }
 
+Mesh* Mesh::generaCajaRectangulo(GLdouble w, GLdouble h) {
+    Mesh* caja = new Mesh();
+
+    caja->mPrimitive = GL_TRIANGLE_STRIP;
+    caja->mNumVertices = 10;
+
+    //Vértices
+    caja->vVertices.reserve(caja->mNumVertices);
+    GLdouble halfW = w / 2;
+    GLdouble halfH = h / 2;
+
+   caja->vVertices.emplace_back(-halfW, halfH, halfW);//v[0]
+   caja->vVertices.emplace_back(-halfW, -halfH, halfW);//v[1]
+   caja->vVertices.emplace_back(halfW, halfH, halfW);//v[2]
+   caja->vVertices.emplace_back(halfW, -halfH, halfW);//v[3]
+   caja->vVertices.emplace_back(halfW, halfH, -halfW);//v[4]
+   caja->vVertices.emplace_back(halfW, -halfW, -halfW);//v[5]
+   caja->vVertices.emplace_back(-halfW, halfW, -halfW);//v[6]
+   caja->vVertices.emplace_back(-halfW, -halfW, -halfW);//v[7]
+   caja->vVertices.emplace_back(caja->vVertices[0]);//v[6] cierre con v[0]
+   caja->vVertices.emplace_back(caja->vVertices[1]);//v[7] cierre con v[1]
+
+    return caja;
+}
+
 Mesh* Mesh::generaFoto(GLdouble w, GLdouble h) {
     Mesh* suelo = generaRectangulo(w, h);
     suelo->vTexCoords.reserve(suelo->mNumVertices);

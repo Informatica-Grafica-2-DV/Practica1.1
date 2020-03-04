@@ -46,12 +46,14 @@ void Scene::chargeTextures() {
 }
 
 void Scene::initScene1() {
+	glEnable(GL_DEPTH_TEST);
 	//Cargamos texturas
 	chargeTextures();
-	
+
 	//Estrella
 	gObjects.push_back(new Estrella3D(75, 6, 75));
 	gObjects.back()->setTexture(gTextures[Resources::BaldosaP]);
+
 	
 	//Suelo
 	gObjects.push_back(new Suelo(500, 500, 5, 5));
@@ -61,6 +63,7 @@ void Scene::initScene1() {
 	gObjects.push_back(new Caja(75));
 	gObjects.back()->setTexture(gTextures[Resources::Container]);
 	dynamic_cast<Caja*>(gObjects.back())->setTextureInt(gTextures[Resources::PapelE]);
+	gObjects.back()->setModelMat(translate(dmat4(1), dvec3(-75.0, 37.5, -75)));
 
 	//Foto
 	Texture* fotoTex = new Texture();
@@ -68,6 +71,12 @@ void Scene::initScene1() {
 	gTextures.push_back(fotoTex);
 	gObjects.push_back(new Foto(50, 75));
 	gObjects.back()->setTexture(fotoTex);
+
+	//Caja transparente
+	gObjects.push_back(new Cristal(500, 100));
+	gObjects.back()->setModelMat(translate(dmat4(1), dvec3(0.0, 250.0, 0.0)));
+	gTextures[Resources::WindowV]->load(Resources::images_[Resources::WindowV].fileName, 100);
+	gObjects.back()->setTexture(gTextures[Resources::WindowV]);
 }
 
 void Scene::initScene0() {

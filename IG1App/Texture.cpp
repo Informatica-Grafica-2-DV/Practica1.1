@@ -67,21 +67,14 @@ void Texture::setWrap(GLuint wp) // GL_REPEAT, GL_CLAMP
 #pragma region Implementación 1.1
 void Texture::loadColorBuffer() {
     if (mId == 0) init();
-    
-    PixMap32RGBA pixMap;
-
-    mWidth = pixMap.width();
-    mHeight = pixMap.height();
 
     GLint level = 0;   //Base image level
     GLint border = 0;  //No border
 
-    int width = (GLuint)IG1App::s_ig1app.getWinWidth();
-    int height = (GLuint)IG1App::s_ig1app.getWinHeight();
+    mWidth = IG1App::s_ig1app.getWinWidth();
+    mHeight = IG1App::s_ig1app.getWinHeight();
 
     glReadBuffer(GL_BACK);
-    glCopyTexImage2D(GL_TEXTURE_2D, level, GL_RGBA, 0, 0, width, height, border);
-
-    //glGetTexImage(GL_TEXTURE_2D, level, GL_RGBA, GL_UNSIGNED_BYTE, pixMap.data());
+    glCopyTexImage2D(GL_TEXTURE_2D, level, GL_RGBA, 0, 0, mWidth, mHeight, border);
 }
 #pragma endregion

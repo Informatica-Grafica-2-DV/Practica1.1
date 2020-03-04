@@ -148,6 +148,7 @@ private:
 	Texture* mTextureInt = nullptr;
 
 public:
+	Caja() {};
 	Caja(GLdouble ld);
 	~Caja();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
@@ -168,7 +169,11 @@ public:
 	virtual void update();
 };
 #pragma endregion
-
+class Cristal : public Caja {
+public:
+	Cristal(GLdouble w, GLdouble h);
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
 #pragma endregion
 
 #endif //_H_Entities_H_
