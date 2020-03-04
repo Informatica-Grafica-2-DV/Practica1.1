@@ -135,6 +135,7 @@ void TrianguloRGB::update() {
 
 RectanguloRGB::RectanguloRGB(GLdouble w_, GLdouble h_) :width(w_), height(h_) {
 	mMesh = Mesh::generaRectanguloRGB(width,height);
+	setModelMat(translate(dmat4(1), dvec3(0.0, 0.0, -100.0)));
 }
 
 RectanguloRGB::~RectanguloRGB() {
@@ -276,7 +277,10 @@ Foto::~Foto() {
 void Foto::render(glm::dmat4 const& modelViewMat) const {
 	if (mMesh != nullptr) {
 		dmat4 aMat = modelViewMat * mModelMat;  //glm matrix multiplication
-		if (mTexture != nullptr) mTexture->bind(GL_REPLACE);
+		if (mTexture != nullptr) {
+			mTexture->bind(GL_REPLACE);
+			mTexture->loadColorBuffer();
+		}
 		upload(aMat);
 		mMesh->render();
 
@@ -286,7 +290,6 @@ void Foto::render(glm::dmat4 const& modelViewMat) const {
 }
 
 void Foto::update() {
-	mTexture->loadColorBuffer();
 }
 #pragma endregion
 

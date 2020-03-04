@@ -52,18 +52,22 @@ void Scene::initScene1() {
 	//Estrella
 	gObjects.push_back(new Estrella3D(75, 6, 75));
 	gObjects.back()->setTexture(gTextures[Resources::BaldosaP]);
-
+	
 	//Suelo
 	gObjects.push_back(new Suelo(500, 500, 5, 5));
 	gObjects.back()->setTexture(gTextures[Resources::BaldosaC]);
-
+	
 	//Caja
 	gObjects.push_back(new Caja(75));
 	gObjects.back()->setTexture(gTextures[Resources::Container]);
 	dynamic_cast<Caja*>(gObjects.back())->setTextureInt(gTextures[Resources::PapelE]);
 
 	//Foto
+	Texture* fotoTex = new Texture();
+	fotoTex->loadColorBuffer();
+	gTextures.push_back(fotoTex);
 	gObjects.push_back(new Foto(50, 75));
+	gObjects.back()->setTexture(fotoTex);
 }
 
 void Scene::initScene0() {
@@ -82,7 +86,6 @@ void Scene::initScene0() {
 #pragma endregion
 #pragma region Ejercicio4
 	gObjects.push_back(new RectanguloRGB(800, 600));
-	gObjects.back()->setModelMat(translate(gObjects.back()->modelMat(), dvec3(0.0, 0.0, -100.0)));
 #pragma endregion
 }
 //-------------------------------------------------------------------------
