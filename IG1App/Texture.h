@@ -6,7 +6,6 @@
 #include <glm.hpp>
 #include "Pixmap32RGBA.h"
 #include <string>
-
 //-------------------------------------------------------------------------
 
 class Texture

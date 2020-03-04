@@ -1,4 +1,5 @@
 #include "Texture.h"
+#include "IG1App.h"
 
 //-------------------------------------------------------------------------
 
@@ -67,10 +68,11 @@ void Texture::setWrap(GLuint wp) // GL_REPEAT, GL_CLAMP
 void Texture::loadColorBuffer() {
     GLint level = 0;   //Base image level
     GLint border = 0;  //No border
-    GLint width = 100;
-    GLint height = 100;
-    
-    glReadBuffer(GL_FRONT);
-    glCopyTexImage2D(GL_TEXTURE_2D, level, GL_RGBA, (glutGet(GLUT_WINDOW_WIDTH) / 2) - width, (glutGet(GLUT_WINDOW_HEIGHT) / 2) - height, width, height, border);
+
+    int width = (GLuint)IG1App::s_ig1app.getWinWidth();
+    int height = (GLuint)IG1App::s_ig1app.getWinHeight();
+
+    glReadBuffer(GL_BACK);
+    glCopyTexImage2D(GL_TEXTURE_2D, level, GL_RGBA, 0, 0, width, height, border);
 }
 #pragma endregion

@@ -20,6 +20,7 @@ void IG1App::close()
 	}
 	free();
 }
+
 //-------------------------------------------------------------------------
 
 void IG1App::run()   // enters the main event processing loop
@@ -189,4 +190,12 @@ void IG1App::specialKey(int key, int x, int y)
 		glutPostRedisplay(); // marks the window as needing to be redisplayed -> calls to display()
 }
 //-------------------------------------------------------------------------
+int IG1App::getWinWidth()
+{
+	return mWinW;
+}
+int IG1App::getWinHeight()
+{
+	return mWinH;
+}
 
