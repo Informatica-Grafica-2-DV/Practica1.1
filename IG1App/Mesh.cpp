@@ -253,11 +253,22 @@ Mesh* Mesh::generaCajaRectangulo(GLdouble w, GLdouble h) {
    caja->vVertices.emplace_back(halfW, halfH, halfW);//v[2]
    caja->vVertices.emplace_back(halfW, -halfH, halfW);//v[3]
    caja->vVertices.emplace_back(halfW, halfH, -halfW);//v[4]
-   caja->vVertices.emplace_back(halfW, -halfW, -halfW);//v[5]
-   caja->vVertices.emplace_back(-halfW, halfW, -halfW);//v[6]
-   caja->vVertices.emplace_back(-halfW, -halfW, -halfW);//v[7]
+   caja->vVertices.emplace_back(halfW, -halfH, -halfW);//v[5]
+   caja->vVertices.emplace_back(-halfW, halfH, -halfW);//v[6]
+   caja->vVertices.emplace_back(-halfW, -halfH, -halfW);//v[7]
    caja->vVertices.emplace_back(caja->vVertices[0]);//v[6] cierre con v[0]
    caja->vVertices.emplace_back(caja->vVertices[1]);//v[7] cierre con v[1]
+
+   //Texturas
+   caja->vTexCoords.reserve(16);
+
+   int j = 0;
+   for (int i = 0; i < 4; i++) {
+       caja->vTexCoords.emplace_back(vec2(0, 1));
+       caja->vTexCoords.emplace_back(vec2(0, 0));
+       caja->vTexCoords.emplace_back(vec2(1, 1));
+       caja->vTexCoords.emplace_back(vec2(1, 0));
+   }
 
     return caja;
 }

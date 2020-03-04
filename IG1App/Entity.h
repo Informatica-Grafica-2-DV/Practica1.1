@@ -169,10 +169,15 @@ public:
 	virtual void update();
 };
 #pragma endregion
-class Cristal : public Caja {
+class Cristal : public Abs_Entity {
+private:
+	GLdouble w_ = 0;
+	GLdouble h_ = 0;
+
 public:
 	Cristal(GLdouble w, GLdouble h);
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update() {}
 };
 #pragma endregion
 

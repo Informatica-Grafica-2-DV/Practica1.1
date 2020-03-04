@@ -167,7 +167,7 @@ void RectanguloRGB::render(glm::dmat4 const& modelViewMat) const {
 Estrella3D::Estrella3D(GLdouble re, GLuint np, GLdouble h) : re_(re), np_(np), h_(h) {
 	mMesh = Mesh::generaEstrella3D(re_, np_, h_);
 	transform = dmat4(1);
-	setModelMat(translate(transform, dvec3({ 0.0,250.0,0.0 })));
+	setModelMat(translate(transform, dvec3({ -50.0, 250.0, -50.0 })));
 }
 
 Estrella3D::~Estrella3D() {
@@ -296,7 +296,7 @@ void Foto::update() {
 
 //-------------------------------------------------------------------------
 
-Cristal::Cristal(GLdouble w, GLdouble h) : Caja()
+Cristal::Cristal(GLdouble w, GLdouble h) : w_(w), h_(h)
 {
 	mMesh = Mesh::generaCajaRectangulo(w, h);
 	transform = dmat4(1);
